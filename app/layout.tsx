@@ -16,8 +16,8 @@ type props = { children: React.ReactNode };
 export default function RootLayout({ children }: props) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={cn(openSans.className, "bg-white dark:bg-[#0d1117]")}>
+      <html lang="en" suppressHydrationWarning={true}>
+        <body className={cn(openSans.className, "bg-white dark:bg-[#010409]")}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
