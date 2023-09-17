@@ -1,10 +1,6 @@
 "use client";
-
-import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-
-import { Button } from "@/components/ui/button";
 
 const ToggleTheme = () => {
   const { setTheme, theme } = useTheme();
@@ -13,9 +9,13 @@ const ToggleTheme = () => {
     else setTheme("dark");
   };
   return (
-    <Button onClick={handleToggleTheme}>
-      {theme === "dark" ? <Sun /> : <Moon />}
-    </Button>
+    <div>
+      <button className="group flex items-center" onClick={handleToggleTheme}>
+        <div className="flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden items-center justify-center bg-background dark:bg-neutral-700 group-hover:bg-emerald-500">
+          {theme === "dark" ? <Sun /> : <Moon />}
+        </div>
+      </button>
+    </div>
   );
 };
 
