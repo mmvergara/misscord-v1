@@ -1,31 +1,24 @@
 "use client";
 import { FormEvent, useState } from "react";
+import { validateServerName } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import axios from "axios";
 const Page = () => {
+  const router = useRouter();
   const [serverName, setServerName] = useState("");
 
-  const validateServerName = (value: string) => {
-    if (value.length < 3) {
-      return "Server name must be at least 3 characters long";
-    }
-    if (value.length > 20) {
-      return "Server name must be less than 20 characters long";
-    }
-    if (!value.match(/^[a-zA-Z0-9_-]+$/)) {
-      return "Server name must only contain letters, numbers, dashes, and underscores";
-    }
-    return null;
-  };
-
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = validateServerName(serverName);
-    if (res) {
-      alert(res);
+    const validateRes = validateServerName(serverName);
+    if (validateRes) {
+      alert(validateRes);
       return;
     }
+
+    const res = await axios.post("/api/misscord-servers", { serverName });
+    router.push("/");
   };
 
   const handleJoinServer = () => {};
