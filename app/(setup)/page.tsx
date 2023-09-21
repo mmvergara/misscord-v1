@@ -7,7 +7,6 @@ const SetupPage = async () => {
   const server = await prismaDB.misscordServer.findFirst({
     where: { members: { some: { profileId: profile.id } } },
   });
-  console.log(server);
   if (server) {
     redirect(`/servers/${server.id}`);
   } else {
